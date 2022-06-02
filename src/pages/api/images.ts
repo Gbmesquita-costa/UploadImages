@@ -39,20 +39,20 @@ export default async function handler(
         })
       )
       .then(() => {
-        return res.status(201).json({ success: true });
+        return res.status(201).json({ success: true }); // Caso consiga cadastrar com sucesso, retorna success: true
       })
       .catch(err =>
         res
           .status(501)
           .json({ error: `Sorry something Happened! ${err.message}` })
       );
-  }
+  } // cadastro de usuário
 
   if (req.method === 'GET') {
     const { after } = req.query;
 
     const queryOptions = {
-      size: 6,
+      size: 6, // paginação 
       ...(after && { after: query.Ref(query.Collection('images'), after) }),
     };
 
@@ -74,7 +74,7 @@ export default async function handler(
         }));
 
         return res.json({
-          data: formattedData,
+          data: formattedData, // retorna os meus dados cadastrados
           after: response.after ? response.after[0].id : null,
         });
       })
